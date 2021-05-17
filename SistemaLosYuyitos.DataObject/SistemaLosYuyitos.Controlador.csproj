@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{58405A03-91A8-453A-B2E0-5F682E120F80}</ProjectGuid>
+    <ProjectGuid>{E445F58D-EF9C-42E2-8420-6DE4275053E9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SistemaLosYuyitos.Entidad</RootNamespace>
-    <AssemblyName>SistemaLosYuyitos.Entidad</AssemblyName>
+    <RootNamespace>SistemaLosYuyitos.Controlador</RootNamespace>
+    <AssemblyName>SistemaLosYuyitos.Controlador</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.19.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.19.11.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,21 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abono.cs" />
-    <Compile Include="Boleta.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="DatosClienteFiado.cs" />
-    <Compile Include="Fiado.cs" />
-    <Compile Include="Orden.cs" />
-    <Compile Include="Pedido.cs" />
-    <Compile Include="Producto.cs" />
-    <Compile Include="Proveedor.cs" />
-    <Compile Include="Usuario.cs" />
+    <Compile Include="MantenedorUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaLosYuyitos.DataAccess\SistemaLosYuyitos.DataAccess.csproj">
+      <Project>{7b31ad57-c8ef-48e9-8ce5-8327eaa52a22}</Project>
+      <Name>SistemaLosYuyitos.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SistemaLosYuyitos.Entidad\SistemaLosYuyitos.Entidad.csproj">
+      <Project>{58405a03-91a8-453a-b2e0-5f682e120f80}</Project>
+      <Name>SistemaLosYuyitos.Entidad</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SistemaLosYuyitos.Entidad
 {
-    public class Class1
+    public class Producto
     {
     }
 }

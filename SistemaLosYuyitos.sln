@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.Console", "SistemaLosYuyitos.Console\SistemaLosYuyitos.Console.csproj", "{A57034D9-F878-4C46-97A6-CB4590543E58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.ConsoleApp", "SistemaLosYuyitos.Console\SistemaLosYuyitos.ConsoleApp.csproj", "{A57034D9-F878-4C46-97A6-CB4590543E58}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.Entidad", "SistemaLosYuyitos.Entidad\SistemaLosYuyitos.Entidad.csproj", "{58405A03-91A8-453A-B2E0-5F682E120F80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.OracleDriver", "SistemaLosYuyitos.DataProvider\SistemaLosYuyitos.OracleDriver.csproj", "{67F00EA7-6DDE-4C91-8D57-DE5FA22431CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.DataAccess", "SistemaLosYuyitos.DataAccess\SistemaLosYuyitos.DataAccess.csproj", "{7B31AD57-C8EF-48E9-8CE5-8327EAA52A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.Controlador", "SistemaLosYuyitos.DataObject\SistemaLosYuyitos.Controlador.csproj", "{E445F58D-EF9C-42E2-8420-6DE4275053E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{58405A03-91A8-453A-B2E0-5F682E120F80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58405A03-91A8-453A-B2E0-5F682E120F80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58405A03-91A8-453A-B2E0-5F682E120F80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67F00EA7-6DDE-4C91-8D57-DE5FA22431CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67F00EA7-6DDE-4C91-8D57-DE5FA22431CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67F00EA7-6DDE-4C91-8D57-DE5FA22431CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67F00EA7-6DDE-4C91-8D57-DE5FA22431CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B31AD57-C8EF-48E9-8CE5-8327EAA52A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B31AD57-C8EF-48E9-8CE5-8327EAA52A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B31AD57-C8EF-48E9-8CE5-8327EAA52A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B31AD57-C8EF-48E9-8CE5-8327EAA52A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
