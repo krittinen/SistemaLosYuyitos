@@ -1,12 +1,6 @@
 Aplicacion Sistema Los Yuyitos para Portafolio de Titulo.
 
-Integrantes:    Rafael Segura 
-
-                Alvaro Segura
-                
-                Patricio Caceres
-                
-                Oscar Trivique
+Integrantes:    Rafael Segura, Alvaro Segura, Patricio Caceres, Oscar Trivique
                 
 Profesor Guia:  Patricio Soto
 
