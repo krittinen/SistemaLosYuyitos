@@ -13,6 +13,6 @@ namespace SistemaLosYuyitos.Entidad
         public string HashContraseña { get; set; }
         public bool Administrador { get; set; }
         public bool Vigente { get; set; }
-
+        public DateTime UltimoCambioContraseña { get; set; }
     }
 }
