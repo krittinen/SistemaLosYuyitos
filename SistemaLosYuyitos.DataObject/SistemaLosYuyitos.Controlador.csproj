@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MantenedorClientes.cs" />
+    <Compile Include="MantenedorFiadosAbonos.cs" />
+    <Compile Include="MantenedorProducto.cs" />
     <Compile Include="MantenedorUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

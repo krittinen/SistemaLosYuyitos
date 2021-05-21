@@ -33,6 +33,11 @@ namespace SistemaLosYuyitos.DataAccess
             conexion.Close();
         }
 
+        public string GetValorParametro(string nombre)
+        {
+            return comando.Parameters[nombre].Value.ToString();
+        }
+
         public void GenerarComando(string texto)
         {
             this.comando = conexion.CreateCommand();
@@ -61,6 +66,15 @@ namespace SistemaLosYuyitos.DataAccess
             IDataReader reader;
             reader = comando.ExecuteReader();
             return reader;
+        }
+
+        public void AgregarParametroOut(string nombre, DbType tipo)
+        {
+            OracleParameter param = comando.CreateParameter();
+            param.ParameterName = nombre;
+            param.DbType = tipo;
+            param.Direction = ParameterDirection.Output;
+            this.comando.Parameters.Add(param);
         }
 
         public int ExecuteNonQuery()
