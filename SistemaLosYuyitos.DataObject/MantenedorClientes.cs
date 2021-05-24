@@ -12,6 +12,7 @@ namespace SistemaLosYuyitos.Controlador
     public class MantenedorClientes
     {
         DataAccess.DataAccess da;
+        MantenedorUsuarios mantenedorUsuarios = new MantenedorUsuarios();
         public bool Create(Cliente cliente)
         {
             bool res = false;
@@ -111,6 +112,82 @@ namespace SistemaLosYuyitos.Controlador
                 }
             }
             return lista;
+        }
+        public bool AutorizarClienteDeudor(string rut_cliente, string id_usuario)
+        {
+            return CambiarEstadoClienteDeudor(rut_cliente, id_usuario, nuevo_estado: true);
+        }
+        public bool RevocarAutorizacionClienteDeudor(string rut_cliente, string id_usuario)
+        {
+            return CambiarEstadoClienteDeudor(rut_cliente, id_usuario, nuevo_estado: false);
+        }
+        public bool CambiarEstadoClienteDeudor(string rut_cliente, string id_usuario, bool nuevo_estado)
+        {
+            bool res = false;
+            EstadoClienteDeudor estadoActual = ObtenerEstadoClienteDeudor(rut_cliente);
+            #region Caso Autorizar
+            if (nuevo_estado)
+            {
+                if (estadoActual == null)
+                {
+                    using (da = new DataAccess.DataAccess())
+                    {
+
+                    }
+                }
+                else if (estadoActual.FechaBloqueo == null)
+                {
+                    res = true;
+                }
+                else
+                {
+                    res = false;
+                }
+            }
+            #endregion
+            #region Caso Revocar
+            else
+            {
+                if (estadoActual == null)
+                {
+                    res = false;
+                }
+                else if (estadoActual.FechaBloqueo != null)
+                {
+
+                }
+                else
+                {
+                    res = true;
+                }
+            }
+            #endregion
+
+            return res;
+        }
+        public EstadoClienteDeudor ObtenerEstadoClienteDeudor(string rut_cliente)
+        {
+            EstadoClienteDeudor estado = null;
+            using (da = new DataAccess.DataAccess())
+            {
+                da.GenerarComando("select rut_cliente, usuario_autorizador, fecha_autorizacion, usuario_bloqueador, fecha_bloqueo from cliente_fiado where rut_cliente = :rut");
+                da.AgregarParametro(":rut", rut_cliente);
+                var reader = da.ExecuteReader();
+                while (reader.Read())
+                {
+                    string fecha_bloqueo = reader["fecha_bloqueo"].ToString();
+                    string usuario_bloqueo = reader["usuario_bloqueador"].ToString();
+                    estado = new EstadoClienteDeudor
+                    {
+                        ClienteDeudor = Read(reader["rut_cliente"].ToString()),
+                        UsuarioAutorizador = mantenedorUsuarios.Read(reader["usuario_autorizador"].ToString()),
+                        FechaAutorizado = Convert.ToDateTime(reader["fecha_autorizacion"].ToString()),
+                        UsuarioBloqueo = String.IsNullOrEmpty(usuario_bloqueo) ? null : mantenedorUsuarios.Read(usuario_bloqueo),
+                        FechaBloqueo = String.IsNullOrEmpty(fecha_bloqueo) ? null : (DateTime?) Convert.ToDateTime(fecha_bloqueo)
+                    };
+                }
+            }
+            return estado;
         }
         public static void BorrarClientePrueba(string rut)
         {

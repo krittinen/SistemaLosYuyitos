@@ -47,7 +47,7 @@
     <Compile Include="Abono.cs" />
     <Compile Include="Boleta.cs" />
     <Compile Include="Cliente.cs" />
-    <Compile Include="DatosClienteFiado.cs" />
+    <Compile Include="EstadoClienteDeudor.cs" />
     <Compile Include="Fiado.cs" />
     <Compile Include="Orden.cs" />
     <Compile Include="Pedido.cs" />

@@ -23,7 +23,7 @@ namespace SistemaLosYuyitos.Controlador
                                     values (:id_orden, :fecha_orden, :total_orden, null, 'n', :usuario)");
                 da.AgregarParametro(":id_orden", orden.IdOrden, DbType.String);
                 da.AgregarParametro(":fecha_orden", orden.FechaOrden, DbType.Date);
-                da.AgregarParametro(":total_orden", orden.TotalOrden, DbType.int);
+                da.AgregarParametro(":total_orden", orden.TotalOrden, DbType.Int32);
                 da.AgregarParametro(":usuario", orden.Usuario, DbType.String);
                 int resultado = da.ExecuteNonQuery();
                 res = resultado >= 0;
@@ -40,11 +40,13 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
+                    /*
                     orden.IdOrden = reader["id_orden"].ToString();
                     orden.FechaOrden = reader["fecha_orden"].ToString();
                     orden.TotalOrden = reader["total_orden"].ToInt;
                     orden.Recibida = reader["USUARIO_id_usuario"].ToString();
                     orden.FechaRecepcion
+                    */
                 }
             }
             return orden;

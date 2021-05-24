@@ -22,7 +22,7 @@ namespace SistemaLosYuyitos.Controlador
                 da.GenerarComando(@"insert into boleta(nro_boleta, fecha_venta, total_boleta, es_fiado, USUARIO_id_usuario, anulada)
                                     values (:nro_boleta, sysdate, :total_boleta, :es_fiado, :usuario, null)");
                 da.AgregarParametro(":nro_boleta", boleta.NroBoleta, DbType.String);
-                da.AgregarParametro(":total_boleta", boleta.TotalBoleta, DbType.int);
+                da.AgregarParametro(":total_boleta", boleta.TotalBoleta, DbType.Int32);
                 da.AgregarParametro(":es_fiado", boleta.BoletaFiada, DbType.String);
                 da.AgregarParametro(":usuario", boleta.UsuarioVendedor, DbType.String);
                 int resultado = da.ExecuteNonQuery();
@@ -44,21 +44,23 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
+                    /*
                     boleta.NroBoleta = reader["nro_boleta"].ToString();
                     boleta.FechaVenta = reader["fecha_venta"].ToString();
                     boleta.TotalBoleta = reader["total_boleta"].ToString();
                     boleta.BoletaFiada = reader["es_fiado"].ToString();
                     boleta.UsuarioVendedor = reader["USUARIO_id_usuario"].ToString();
+                    */
                 }
             }
             return boleta;
         }
 
         public bool Anular(string nro_boleta)
-        {
+{
             bool res = false;
             using (da = new DataAccess.DataAccess())
-            {
+	{
                 da.GenerarComando("update boleta set anulada = 'y' where nro_boleta = :nro_boleta");
                 da.AgregarParametro(":nro_boleta", nro_boleta);
                 res = da.ExecuteNonQuery() > 0;
@@ -66,5 +68,5 @@ namespace SistemaLosYuyitos.Controlador
             return res;
         }
 
-    }
+	}
 }
