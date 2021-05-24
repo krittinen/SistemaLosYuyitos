@@ -67,5 +67,34 @@ namespace SistemaLosYuyitos.ConsoleApp
             UltimoCambioContraseña = new DateTime(2021, 1, 1)
         };
 
+        public static Producto productoPrueba = new Producto()
+        {
+            CodigoBarra = "12345678",
+            FechaVencimiento = null,
+            Descripcion = "Producto de prueba",
+            PrecioCompra = 12000,
+            PrecioVenta = 15000,
+            Stock = 1000,
+            StockCritico = 100,
+            Vigencia = true,
+            IdProveedor = 1,
+            IdFamilia = 1,
+            IdTipo = 1
+        };
+        public static Producto productoPruebaModificado = new Producto()
+        {
+            CodigoBarra = "12345678",
+            FechaVencimiento = null,
+            Descripcion = "Producto de prueba 2",
+            PrecioCompra = 18000,
+            PrecioVenta = 21000,
+            Stock = 1000,
+            StockCritico = 50,
+            Vigencia = true,
+            IdProveedor = 1,
+            IdFamilia = 1,
+            IdTipo = 1
+        };
+
     }
 }

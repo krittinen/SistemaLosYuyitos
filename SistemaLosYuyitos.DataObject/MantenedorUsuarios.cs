@@ -41,13 +41,15 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    usuario = new Usuario();
-                    usuario.IdUsuario = reader["id_usuario"].ToString();
-                    usuario.NombreUsuario = reader["nombre_usuario"].ToString();
-                    usuario.Administrador = reader["administrador"].ToString() == "y";
-                    usuario.Vigente = reader["vigencia"].ToString() == "y";
-                    usuario.FechaCreacion = Convert.ToDateTime(reader["fecha_creacion"].ToString());
-                    usuario.UltimoCambioContraseña = Convert.ToDateTime(reader["ultimo_cambio_contraseña"].ToString());
+                    usuario = new Usuario
+                    {
+                        IdUsuario = reader["id_usuario"].ToString(),
+                        NombreUsuario = reader["nombre_usuario"].ToString(),
+                        Administrador = reader["administrador"].ToString() == "y",
+                        Vigente = reader["vigencia"].ToString() == "y",
+                        FechaCreacion = Convert.ToDateTime(reader["fecha_creacion"].ToString()),
+                        UltimoCambioContraseña = Convert.ToDateTime(reader["ultimo_cambio_contraseña"].ToString())
+                    };
                 }
             }
             return usuario;

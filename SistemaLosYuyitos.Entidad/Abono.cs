@@ -24,6 +24,6 @@ namespace SistemaLosYuyitos.Entidad
             }
         }
         public DateTime FechaAbono { get; set; }
-
+        public Decimal IdFiado { get; set; }
     }
 }

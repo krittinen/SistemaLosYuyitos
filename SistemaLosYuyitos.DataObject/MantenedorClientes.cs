@@ -47,16 +47,18 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    cliente = new Cliente();
-                    cliente.RutCliente = reader["rut_cliente"].ToString();
-                    cliente.NombreCliente = reader["nombre_cliente"].ToString();
-                    cliente.Telefono = reader["telefono"].ToString();
-                    cliente.Correo = reader["correo"].ToString();
-                    cliente.Direccion = reader["direccion"].ToString();
-                    cliente.AutorizadoParaFiar = reader["autorizado_para_fiar"].ToString() == "y";
-                    cliente.IdComuna = Convert.ToInt32(reader["id_comuna"].ToString());
-                    cliente.IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString());
-                    cliente.IdRegion = Convert.ToInt32(reader["id_region"].ToString());
+                    cliente = new Cliente
+                    {
+                        RutCliente = reader["rut_cliente"].ToString(),
+                        NombreCliente = reader["nombre_cliente"].ToString(),
+                        Telefono = reader["telefono"].ToString(),
+                        Correo = reader["correo"].ToString(),
+                        Direccion = reader["direccion"].ToString(),
+                        AutorizadoParaFiar = reader["autorizado_para_fiar"].ToString() == "y",
+                        IdComuna = Convert.ToInt32(reader["id_comuna"].ToString()),
+                        IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString()),
+                        IdRegion = Convert.ToInt32(reader["id_region"].ToString())
+                    };
                 }
             }
             return cliente;
@@ -67,15 +69,14 @@ namespace SistemaLosYuyitos.Controlador
             bool res = false;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("update cliente set nombre_cliente = :nombre, telefono = :telefono, correo = :correo, direccion = :direccion, autorizado_para_fiar = :autorizado where rut_cliente = :rut");
+                da.GenerarComando("update cliente set nombre_cliente = :nombre, telefono = :telefono, correo = :correo, direccion = :direccion, id_comuna = :comuna, autorizado_para_fiar = :autorizado where rut_cliente = :rut");
                 da.AgregarParametro(":nombre_cliente", cliente.NombreCliente);
                 da.AgregarParametro(":telefono", cliente.Telefono);
                 da.AgregarParametro(":correo", cliente.Correo);
                 da.AgregarParametro(":direccion", cliente.Direccion);
+                da.AgregarParametro(":comuna", cliente.IdComuna, DbType.Int32);
                 da.AgregarParametro(":autorizado", cliente.AutorizadoParaFiar ? "y" : "n");
                 da.AgregarParametro(":rut", cliente.RutCliente);
-                //da.AgregarParametro(":comuna", cliente.IdComuna, DbType.Int32);
-                //, id_comuna = :comuna
                 int resultado = da.ExecuteNonQuery();
                 res = resultado > 0;
             }
@@ -94,16 +95,18 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    Cliente cliente = new Cliente();
-                    cliente.RutCliente = reader["rut_cliente"].ToString();
-                    cliente.NombreCliente = reader["nombre_cliente"].ToString();
-                    cliente.Telefono = reader["telefono"].ToString();
-                    cliente.Correo = reader["correo"].ToString();
-                    cliente.Direccion = reader["direccion"].ToString();
-                    cliente.AutorizadoParaFiar = reader["autorizado_para_fiar"].ToString() == "y";
-                    cliente.IdComuna = Convert.ToInt32(reader["id_comuna"].ToString());
-                    cliente.IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString());
-                    cliente.IdRegion = Convert.ToInt32(reader["id_region"].ToString());
+                    Cliente cliente = new Cliente
+                    {
+                        RutCliente = reader["rut_cliente"].ToString(),
+                        NombreCliente = reader["nombre_cliente"].ToString(),
+                        Telefono = reader["telefono"].ToString(),
+                        Correo = reader["correo"].ToString(),
+                        Direccion = reader["direccion"].ToString(),
+                        AutorizadoParaFiar = reader["autorizado_para_fiar"].ToString() == "y",
+                        IdComuna = Convert.ToInt32(reader["id_comuna"].ToString()),
+                        IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString()),
+                        IdRegion = Convert.ToInt32(reader["id_region"].ToString())
+                    };
                     lista.Add(cliente);
                 }
             }

@@ -51,6 +51,7 @@ namespace SistemaLosYuyitos.DataAccess
         public void GenerarComando(string texto)
         {
             this.comando = conexion.CreateCommand();
+            this.comando.BindByName = true;
             this.comando.CommandText = texto;
         }
 
