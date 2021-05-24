@@ -14,5 +14,6 @@ namespace SistemaLosYuyitos.Entidad
         public bool Administrador { get; set; }
         public bool Vigente { get; set; }
         public DateTime UltimoCambioContraseña { get; set; }
+        public DateTime FechaCreacion { get; set; }
     }
 }

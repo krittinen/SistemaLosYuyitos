@@ -7,6 +7,7 @@ using System.Data;
 using Oracle.ManagedDataAccess.Client;
 using Oracle.ManagedDataAccess.Types;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace SistemaLosYuyitos.DataAccess
 {
@@ -20,7 +21,16 @@ namespace SistemaLosYuyitos.DataAccess
             conexion = new OracleConnection();
             LeerConfiguracion();
             conexion.ConnectionString = ruta_conexion;
-            conexion.Open();
+            try
+            {
+                conexion.Open();
+                Console.WriteLine("Conectado");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
         }
 
         public void Open()
@@ -64,8 +74,17 @@ namespace SistemaLosYuyitos.DataAccess
         public IDataReader ExecuteReader()
         {
             IDataReader reader;
-            reader = comando.ExecuteReader();
-            return reader;
+            try
+            {
+                reader = comando.ExecuteReader();
+
+                return reader;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
         }
 
         public void AgregarParametroOut(string nombre, DbType tipo)
@@ -79,8 +98,15 @@ namespace SistemaLosYuyitos.DataAccess
 
         public int ExecuteNonQuery()
         {
-            int result;
-            result = comando.ExecuteNonQuery();
+            int result = -1;
+            try
+            {
+                result = comando.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             return result;
         }
 

@@ -17,7 +17,7 @@ namespace SistemaLosYuyitos.Controlador
             bool res = false;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando(@"insert into cliente(rut_cliente, nombre_cliente, telefono, correo, direccion, autorizado_para_fiar, comuna_id_comuna)
+                da.GenerarComando(@"insert into cliente(rut_cliente, nombre_cliente, telefono, correo, direccion, autorizado_para_fiar, id_comuna)
                                     values (:rut, :nombre, :telefono, :correo, :direccion, :autorizado, :comuna)");
                 da.AgregarParametro(":rut", cliente.RutCliente);
                 da.AgregarParametro(":nombre_cliente", cliente.NombreCliente);
@@ -27,28 +27,36 @@ namespace SistemaLosYuyitos.Controlador
                 da.AgregarParametro(":autorizado", cliente.AutorizadoParaFiar ? "y" : "n");
                 da.AgregarParametro(":comuna", cliente.IdComuna, DbType.Int32);
                 int resultado = da.ExecuteNonQuery();
-                res = resultado >= 0;
+                res = resultado > 0;
             }
             return res;
         }
 
         public Cliente Read(string rut)
         {
-            Cliente cliente = new Cliente();
+            Cliente cliente = null;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select rut_cliente, nombre_cliente, telefono, correo, direccion, autorizado_para_fiar, comuna_id_comuna from cliente where rut_cliente = :rut");
+                da.GenerarComando(@"select rut_cliente, nombre_cliente, telefono, correo, direccion, autorizado_para_fiar, cl.id_comuna, pr.id_provincia, re.id_region
+                                    from cliente cl
+                                    inner join comuna co on (cl.id_comuna = co.id_comuna)
+                                    inner join provincia pr on (co.id_provincia = pr.id_provincia)
+                                    inner join region re on (pr.id_region = re.id_region)
+                                    where rut_cliente = :rut");
                 da.AgregarParametro(":rut", rut);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
+                    cliente = new Cliente();
                     cliente.RutCliente = reader["rut_cliente"].ToString();
                     cliente.NombreCliente = reader["nombre_cliente"].ToString();
                     cliente.Telefono = reader["telefono"].ToString();
                     cliente.Correo = reader["correo"].ToString();
                     cliente.Direccion = reader["direccion"].ToString();
                     cliente.AutorizadoParaFiar = reader["autorizado_para_fiar"].ToString() == "y";
-                    cliente.IdComuna = Convert.ToInt32(reader["comuna_id_comuna"].ToString());
+                    cliente.IdComuna = Convert.ToInt32(reader["id_comuna"].ToString());
+                    cliente.IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString());
+                    cliente.IdRegion = Convert.ToInt32(reader["id_region"].ToString());
                 }
             }
             return cliente;
@@ -59,16 +67,17 @@ namespace SistemaLosYuyitos.Controlador
             bool res = false;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("update cliente set nombre_cliente = :nombre, telefono = :telefono, correo = :correo, direccion = :direccion, autorizado_para_fiar = :autorizado, comuna_id_comuna = :comuna where rut_cliente = :rut");
-                da.AgregarParametro(":rut", cliente.RutCliente);
+                da.GenerarComando("update cliente set nombre_cliente = :nombre, telefono = :telefono, correo = :correo, direccion = :direccion, autorizado_para_fiar = :autorizado where rut_cliente = :rut");
                 da.AgregarParametro(":nombre_cliente", cliente.NombreCliente);
                 da.AgregarParametro(":telefono", cliente.Telefono);
                 da.AgregarParametro(":correo", cliente.Correo);
                 da.AgregarParametro(":direccion", cliente.Direccion);
                 da.AgregarParametro(":autorizado", cliente.AutorizadoParaFiar ? "y" : "n");
-                da.AgregarParametro(":comuna", cliente.IdComuna, DbType.Int32);
+                da.AgregarParametro(":rut", cliente.RutCliente);
+                //da.AgregarParametro(":comuna", cliente.IdComuna, DbType.Int32);
+                //, id_comuna = :comuna
                 int resultado = da.ExecuteNonQuery();
-                res = resultado >= 0;
+                res = resultado > 0;
             }
             return res;
         }
@@ -77,7 +86,11 @@ namespace SistemaLosYuyitos.Controlador
             List <Cliente> lista = new List<Cliente>();
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select rut_cliente, nombre_cliente, telefono, correo, direccion, autorizado_para_fiar, comuna_id_comuna from cliente");
+                da.GenerarComando(@"select rut_cliente, nombre_cliente, telefono, correo, direccion, autorizado_para_fiar, c.id_comuna, p.id_provincia, r.id_region
+                                    from cliente c
+                                    inner join comuna co on (c.id_comuna = co.id_comuna)
+                                    inner join provincia p on (co.id_provincia = p.id_provincia)
+                                    inner join region r on (p.id_region = r.id_region)");
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
@@ -88,11 +101,22 @@ namespace SistemaLosYuyitos.Controlador
                     cliente.Correo = reader["correo"].ToString();
                     cliente.Direccion = reader["direccion"].ToString();
                     cliente.AutorizadoParaFiar = reader["autorizado_para_fiar"].ToString() == "y";
-                    cliente.IdComuna = Convert.ToInt32(reader["comuna_id_comuna"].ToString());
+                    cliente.IdComuna = Convert.ToInt32(reader["id_comuna"].ToString());
+                    cliente.IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString());
+                    cliente.IdRegion = Convert.ToInt32(reader["id_region"].ToString());
                     lista.Add(cliente);
                 }
             }
             return lista;
+        }
+        public static void BorrarClientePrueba(string rut)
+        {
+            using (DataAccess.DataAccess da = new DataAccess.DataAccess())
+            {
+                da.GenerarComando("delete from cliente where rut_cliente = :rut");
+                da.AgregarParametro(":rut", rut);
+                da.ExecuteNonQuery();
+            }
         }
     }
 }
