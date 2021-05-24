@@ -27,24 +27,29 @@ namespace SistemaLosYuyitos.Controlador
                 da.AgregarParametro(":administrador", usuario.Administrador ? "y" : "n", DbType.String);
                 da.AgregarParametro(":vigencia", usuario.Vigente ? "y" : "n", DbType.String);
                 int resultado = da.ExecuteNonQuery();
-                res = resultado >= 0;
+                res = resultado > 0;
             }
             return res;
         }
         public Usuario Read(string id_usuario)
         {
-            Usuario usuario = new Usuario();
+            Usuario usuario = null;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select id_usuario, nombre_usuario, administrador, vigencia from usuario where id_usuario = :usuario");
+                da.GenerarComando("select id_usuario, nombre_usuario, administrador, vigencia, ultimo_cambio_contraseña, fecha_creacion from usuario where id_usuario = :usuario");
                 da.AgregarParametro(":usuario", id_usuario);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    usuario.IdUsuario = reader["id_usuario"].ToString();
-                    usuario.NombreUsuario = reader["nombre_usuario"].ToString();
-                    usuario.Administrador = reader["administrador"].ToString() == "y";
-                    usuario.Vigente = reader["vigencia"].ToString() == "y";
+                    usuario = new Usuario
+                    {
+                        IdUsuario = reader["id_usuario"].ToString(),
+                        NombreUsuario = reader["nombre_usuario"].ToString(),
+                        Administrador = reader["administrador"].ToString() == "y",
+                        Vigente = reader["vigencia"].ToString() == "y",
+                        FechaCreacion = Convert.ToDateTime(reader["fecha_creacion"].ToString()),
+                        UltimoCambioContraseña = Convert.ToDateTime(reader["ultimo_cambio_contraseña"].ToString())
+                    };
                 }
             }
             return usuario;
@@ -61,8 +66,9 @@ namespace SistemaLosYuyitos.Controlador
                 da.AgregarParametro(":ultimo_cambio", usuario.UltimoCambioContraseña, DbType.Date);
                 da.AgregarParametro(":admin", usuario.Administrador ? "y" : "n");
                 da.AgregarParametro(":vigencia", usuario.Vigente ? "y" : "n");
+                da.AgregarParametro(":id_usuario", usuario.IdUsuario);
                 int resultado = da.ExecuteNonQuery();
-                res = resultado >= 0;
+                res = resultado > 0;
             }
             return res;
         }
@@ -84,8 +90,9 @@ namespace SistemaLosYuyitos.Controlador
             bool logueado = false;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select id_usuario, nombre_usuario, administrador, vigencia from usuario where id_usuario = :usuario and hash_contraseña = :hash");
+                da.GenerarComando("select id_usuario, nombre_usuario, administrador, vigencia from usuario where id_usuario = :usuario and hash_contraseña = :hash and vigencia = 'y'");
                 da.AgregarParametro(":usuario", id_usuario);
+                da.AgregarParametro(":hash", hash);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
@@ -93,6 +100,19 @@ namespace SistemaLosYuyitos.Controlador
                 }
             }
             return logueado;
+        }
+
+        public static void BorrarUsuariosPrueba(List<string> ids)
+        {
+            foreach (string id in ids) 
+            {
+                using (DataAccess.DataAccess da = new DataAccess.DataAccess())
+                {
+                    da.GenerarComando("delete from usuario where id_usuario = :id");
+                    da.AgregarParametro(":id", id);
+                    da.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
