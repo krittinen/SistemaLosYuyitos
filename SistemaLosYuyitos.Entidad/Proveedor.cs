@@ -8,5 +8,13 @@ namespace SistemaLosYuyitos.Entidad
 {
     public class Proveedor
     {
+        public string IdProveedor { get; set; }
+        public string NombreProveedor { get; set; }
+        public string Telefono { get; set; }
+        public string Email { get; set; }
+        public string Direccion { get; set; }
+        public int Comuna { get; set; }
+        public int Rubro { get; set; }
+        public string Vigencia { get; set; }
     }
 }
