@@ -121,42 +121,56 @@ namespace SistemaLosYuyitos.Controlador
         {
             return CambiarEstadoClienteDeudor(rut_cliente, id_usuario, nuevo_estado: false);
         }
-        public bool CambiarEstadoClienteDeudor(string rut_cliente, string id_usuario, bool nuevo_estado)
+        private bool CambiarEstadoClienteDeudor(string rut_cliente, string id_usuario, bool nuevo_estado)
         {
             bool res = false;
             EstadoClienteDeudor estadoActual = ObtenerEstadoClienteDeudor(rut_cliente);
+
             #region Caso Autorizar
             if (nuevo_estado)
             {
-                if (estadoActual == null)
+                if (estadoActual == null) // Cliente no se encuentra registrado como deudor, se autoriza para deudas
                 {
                     using (da = new DataAccess.DataAccess())
                     {
-
+                        da.GenerarComando(@"insert into cliente_fiado(rut_cliente, usuario_autorizador, fecha_autorizacion)
+                                            values (:rut, :usuario, :fecha)");
+                        da.AgregarParametro(":rut", rut_cliente);
+                        da.AgregarParametro(":usuario", id_usuario);
+                        da.AgregarParametro(":fecha", DateTime.Now, DbType.Date);
+                        res = da.ExecuteNonQuery() > 0;
                     }
                 }
-                else if (estadoActual.FechaBloqueo == null)
+                else if (estadoActual.FechaBloqueo == null) // Cliente ya se encuentra registrado como deudor habilitado
                 {
                     res = true;
                 }
-                else
+                else // Cliente se encuentra registrado como deudor no habilitado, no es posible desbloquear
                 {
                     res = false;
                 }
             }
             #endregion
+
             #region Caso Revocar
             else
             {
-                if (estadoActual == null)
+                if (estadoActual == null) // Cliente no se encuentra registrado como deudor, no se puede bloquear en forma preventiva
                 {
                     res = false;
                 }
-                else if (estadoActual.FechaBloqueo != null)
+                else if (estadoActual.FechaBloqueo != null) // Cliente se encuentra registrado como deudor habilitado, se revoca autorizacion
                 {
-
+                    using (da = new DataAccess.DataAccess())
+                    {
+                        da.GenerarComando(@"update cliente_fiado set usuario_bloqueador = :usuario, fecha_bloqueo = :fecha where rut_cliente = :rut)");
+                        da.AgregarParametro(":usuario", id_usuario);
+                        da.AgregarParametro(":fecha", DateTime.Now, DbType.Date);
+                        da.AgregarParametro(":rut", rut_cliente);
+                        res = da.ExecuteNonQuery() > 0;
+                    }
                 }
-                else
+                else // Cliente se encuentra registrado como deudor no habilitado, ya fue bloqueado
                 {
                     res = true;
                 }
