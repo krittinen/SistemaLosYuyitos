@@ -15,6 +15,6 @@ namespace SistemaLosYuyitos.Entidad
         public string Direccion { get; set; }
         public int Comuna { get; set; }
         public int Rubro { get; set; }
-        public string Vigencia { get; set; }
+        public bool Vigencia { get; set; }
     }
 }

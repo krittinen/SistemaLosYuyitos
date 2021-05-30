@@ -12,6 +12,7 @@ namespace SistemaLosYuyitos.Controlador
     public class MantenedorClientes
     {
         DataAccess.DataAccess da;
+        MantenedorUsuarios mantenedorUsuarios = new MantenedorUsuarios();
         public bool Create(Cliente cliente)
         {
             bool res = false;

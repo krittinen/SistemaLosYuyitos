@@ -22,8 +22,8 @@ namespace SistemaLosYuyitos.ConsoleApp
         static Abono abono;
         static Producto producto;
         static bool resultado;
-        static int correcto;
-        static int error;
+        static int correctos;
+        static int errores;
         static void Main(string[] args)
         {
             MantenedorClientes.BorrarClientePrueba(DatosPruebas.clientePrueba.RutCliente);
@@ -68,8 +68,8 @@ namespace SistemaLosYuyitos.ConsoleApp
         }
         static void MenuMantenedorUsuarios()
         {
-            error = 0;
-            correcto = 0;
+            errores = 0;
+            correctos = 0;
             Console.Clear();
             Console.WriteLine("------ Admin Consola para Sistema Los Yuyitos -----\n\n");
             Console.WriteLine("Pruebas Mantenedor de Usuarios\n\n");
@@ -80,12 +80,12 @@ namespace SistemaLosYuyitos.ConsoleApp
                 if (mantenedorUsuarios.Create(DatosPruebas.usuarioPrueba) && mantenedorUsuarios.Create(DatosPruebas.usuarioNoVigente))
                 {
                     Console.WriteLine("Prueba satisfactoria.");
-                    correcto++;
+                    correctos++;
                 }
                 else
                 {
                     Console.WriteLine("Prueba no satisfactoria.");
-                    error++;
+                    errores++;
                 }
             }
             catch (SqlException ex)
@@ -107,12 +107,12 @@ namespace SistemaLosYuyitos.ConsoleApp
                 Console.WriteLine("Ultimo Cambio de Contraseña: {0}", usuario.UltimoCambioContraseña);
                 Console.WriteLine("Fecha de Creacion: {0}", usuario.FechaCreacion);
                 Console.WriteLine("\nPrueba satisfactoria");
-                correcto++;
+                correctos++;
             }
             else
             {
                 Console.WriteLine("Prueba no satisfactoria");
-                error++;
+                errores++;
             }
             usuario = mantenedorUsuarios.Read(DatosPruebas.usuarioNoVigente.IdUsuario);
             if (usuario.IdUsuario != null && usuario.IdUsuario == DatosPruebas.usuarioNoVigente.IdUsuario)
@@ -125,12 +125,12 @@ namespace SistemaLosYuyitos.ConsoleApp
                 Console.WriteLine("Ultimo Cambio de Contraseña: {0}", usuario.UltimoCambioContraseña);
                 Console.WriteLine("Fecha de Creacion: {0}", usuario.FechaCreacion);
                 Console.WriteLine("\nPrueba satisfactoria");
-                correcto++;
+                correctos++;
             }
             else
             {
                 Console.WriteLine("Prueba no satisfactoria");
-                error++;
+                errores++;
             }
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -149,18 +149,18 @@ namespace SistemaLosYuyitos.ConsoleApp
                     Console.WriteLine("Ultimo Cambio de Contraseña: {0}", usuario.UltimoCambioContraseña);
                     Console.WriteLine("Fecha de Creacion: {0}", usuario.FechaCreacion);
                     Console.WriteLine("\nPrueba satisfactoria");
-                    correcto++;
+                    correctos++;
                 }
                 else
                 {
                     Console.WriteLine("Prueba no satisfactoria");
-                    error++;
+                    errores++;
                 }
             }
             else
             {
                 Console.WriteLine("Prueba no satisfactoria");
-                error++;
+                errores++;
             }
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -170,11 +170,11 @@ namespace SistemaLosYuyitos.ConsoleApp
             resultado = mantenedorUsuarios.Login(DatosPruebas.usuarioPrueba.IdUsuario, DatosPruebas.ContraseñaUsuarioPrueba);
             if (resultado)
             {
-                correcto++;
+                correctos++;
             }
             else
             {
-                error++;
+                errores++;
             }
             Console.WriteLine("Prueba de logueo con cuenta vigente y contraseña correcta: {0}", resultado ? "Satisfactorio" : "No satisfactorio");
             Console.WriteLine("Presione cualquier tecla para continuar...");
@@ -183,11 +183,11 @@ namespace SistemaLosYuyitos.ConsoleApp
             resultado = mantenedorUsuarios.Login(DatosPruebas.usuarioPrueba.IdUsuario, DatosPruebas.ContraseñaUsuarioPruebaIncorrecta);
             if (!resultado)
             {
-                correcto++;
+                correctos++;
             }
             else
             {
-                error++;
+                errores++;
             }
             Console.WriteLine("Prueba de logueo con cuenta vigente y contraseña incorrecta: {0}", !resultado ? "Satisfactorio" : "No satisfactorio");
             Console.WriteLine("Presione cualquier tecla para continuar...");
@@ -196,11 +196,11 @@ namespace SistemaLosYuyitos.ConsoleApp
             resultado = mantenedorUsuarios.Login(DatosPruebas.usuarioNoVigente.IdUsuario, DatosPruebas.ContraseñaUsuarioPrueba);
             if (!resultado)
             {
-                correcto++;
+                correctos++;
             }
             else
             {
-                error++;
+                errores++;
             }
             Console.WriteLine("Prueba de logueo con cuenta no vigente: {0}", !resultado ? "Satisfactorio" : "No satisfactorio");
             Console.WriteLine("Presione cualquier tecla para continuar...");
@@ -209,11 +209,11 @@ namespace SistemaLosYuyitos.ConsoleApp
             resultado = mantenedorUsuarios.Login(DatosPruebas.IdUsuarioInexistente, DatosPruebas.ContraseñaUsuarioPrueba);
             if (!resultado)
             {
-                correcto++;
+                correctos++;
             }
             else
             {
-                error++;
+                errores++;
             }
             Console.WriteLine("Prueba de logueo con cuenta erronea: {0}", !resultado ? "Satisfactorio" : "No satisfactorio");
             Console.WriteLine("Presione cualquier tecla para continuar...");
@@ -227,27 +227,27 @@ namespace SistemaLosYuyitos.ConsoleApp
                 if (u1 == null && u2 == null)
                 {
                     Console.WriteLine("Prueba satisfactoria");
-                    correcto++;
+                    correctos++;
                 }
                 else
                 {
                     Console.WriteLine("Prueba no satisfactoria");
-                    error++;
+                    errores++;
                 }
             }
             else
             {
                 Console.WriteLine("Prubea no satisfactoria");
-                error++;
+                errores++;
             }
 
-            Console.WriteLine("\nPruebas correctas: {0}\nPruebas erroneas: {1}\n", correcto, error);
+            Console.WriteLine("\nPruebas correctas: {0}\nPruebas erroneas: {1}\n", correctos, errores);
             Console.WriteLine("Presione cualquier tecla para continuar...");
         }
         static void MenuMantenedorClientes()
         {
-            error = 0;
-            correcto = 0;
+            errores = 0;
+            correctos = 0;
             Console.Clear();
             Console.WriteLine("------ Admin Consola para Sistema Los Yuyitos -----\n\n");
             Console.WriteLine("Pruebas Mantenedor de Clientes\n\n");
@@ -258,12 +258,12 @@ namespace SistemaLosYuyitos.ConsoleApp
                 if (mantenedorClientes.Create(DatosPruebas.clientePrueba))
                 {
                     Console.WriteLine("Prueba satisfactoria.");
-                    correcto++;
+                    correctos++;
                 }
                 else
                 {
                     Console.WriteLine("Prueba no satisfactoria.");
-                    error++;
+                    errores++;
                 }
             }
             catch (SqlException ex)
@@ -287,12 +287,12 @@ namespace SistemaLosYuyitos.ConsoleApp
                 Console.WriteLine("ID Provincia: {0}", cliente.IdProvincia);
                 Console.WriteLine("ID Region: {0}", cliente.IdRegion); 
                 Console.WriteLine("\nPrueba satisfactoria");
-                correcto++;
+                correctos++;
             }
             else
             {
                 Console.WriteLine("Prueba no satisfactoria");
-                error++;
+                errores++;
             }
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -313,18 +313,18 @@ namespace SistemaLosYuyitos.ConsoleApp
                     Console.WriteLine("ID Provincia: {0}", cliente.IdProvincia);
                     Console.WriteLine("ID Region: {0}", cliente.IdRegion);
                     Console.WriteLine("\nPrueba satisfactoria");
-                    correcto++;
+                    correctos++;
                 }
                 else
                 {
                     Console.WriteLine("Prueba no satisfactoria");
-                    error++;
+                    errores++;
                 }
             }
             else
             {
                 Console.WriteLine("Prueba no satisfactoria");
-                error++;
+                errores++;
             }
             Console.WriteLine("Presione cualquier tecla para continuar...");
             Console.ReadKey();
@@ -334,7 +334,7 @@ namespace SistemaLosYuyitos.ConsoleApp
             if (lista.Count > 0)
             {
                 Console.WriteLine("Prueba satisfactoria\n");
-                correcto++;
+                correctos++;
                 foreach (var item in lista)
                 {
                     Console.WriteLine(item.RutCliente);
@@ -343,10 +343,10 @@ namespace SistemaLosYuyitos.ConsoleApp
             else
             {
                 Console.WriteLine("Prueba no satisfactoria");
-                error++;
+                errores++;
             }
 
-            Console.WriteLine("\nPruebas correctas: {0}\nPruebas erroneas: {1}\n", correcto, error);
+            Console.WriteLine("\nPruebas correctas: {0}\nPruebas erroneas: {1}\n", correctos, errores);
             Console.WriteLine("Presione cualquier tecla para continuar...");
         }
 

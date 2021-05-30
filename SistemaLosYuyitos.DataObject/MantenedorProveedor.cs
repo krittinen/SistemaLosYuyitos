@@ -26,8 +26,8 @@ namespace SistemaLosYuyitos.Controlador
                 da.AgregarParametro(":telefono", proveedor.Telefono, DbType.String);
                 da.AgregarParametro(":email", proveedor.Email, DbType.String);
                 da.AgregarParametro(":direccion", proveedor.Direccion, DbType.String);
-                da.AgregarParametro(":comuna", proveedor.Comuna, DbType.int);
-                da.AgregarParametro(":rubro", proveedor.Rubro, DbType.int );
+                da.AgregarParametro(":comuna", proveedor.Comuna, DbType.Int32);
+                da.AgregarParametro(":rubro", proveedor.Rubro, DbType.Int32);
                 da.AgregarParametro(":vigencia", proveedor.Vigencia ? "y" : "n", DbType.String);
                 int resultado = da.ExecuteNonQuery();
                 res = resultado >= 0;
@@ -44,14 +44,16 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
+                    /*
                     proveedor.IdProveedor = reader["id_proveedor"].ToString();
                     proveedor.NombreProveedor = reader["nombre_proveedor"].ToString();
                     proveedor.Telefono = reader["telefono"].ToString();
                     proveedor.Email = reader["email"].ToString();
                     proveedor.Direccion = reader["direccion"].ToString();
-                    proveedor.Comuna = reader["COMUNA_id_comuna"].ToInt();
-                    proveedor.Rubro = reader["RUBRO_id_rubro"].ToInt();
+                    proveedor.Comuna = reader["COMUNA_id_comuna"];
+                    proveedor.Rubro = reader["RUBRO_id_rubro"];
                     proveedor.Vigencia = reader["vigencia"].ToString();
+                    */
                 }
             }
             return proveedor;
@@ -67,8 +69,8 @@ namespace SistemaLosYuyitos.Controlador
                 da.AgregarParametro(":telefono", proveedor.Telefono, DbType.String);
                 da.AgregarParametro(":email", proveedor.Email, DbType.String);
                 da.AgregarParametro(":direccion", proveedor.Direccion, DbType.String);
-                da.AgregarParametro(":comuna", proveedor.Comuna, DbType.int);
-                da.AgregarParametro(":rubro", proveedor.Rubro, DbType.int);
+                da.AgregarParametro(":comuna", proveedor.Comuna, DbType.Int32);
+                da.AgregarParametro(":rubro", proveedor.Rubro, DbType.Int32);
                 da.AgregarParametro(":vigencia", proveedor.Vigencia ? "y" : "n", DbType.String);
                 int resultado = da.ExecuteNonQuery();
                 res = resultado >= 0;
