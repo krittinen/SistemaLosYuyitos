@@ -20,9 +20,9 @@ namespace SistemaLosYuyitos.Controlador
             using (da = new DataAccess.DataAccess())
             {
                 da.GenerarComando(@"insert into proveedor(id_proveedor, nombre_proveedor, telefono, email, direccion, COMUNA_id_comuna, RUBRO_id_rubro, vigencia)
-                                    values (:id_proveedor, :nombre_proveedor, :telefono, :email, :direccion, :comuna, :rubro, :vigencia)");
-                da.AgregarParametro(":id_proveedor", proveedor.IdProveedor, DbType.String);
-                da.AgregarParametro(":nombre_proveedor", proveedor.NombreProveedor, DbType.String);
+                                    values (:id_proveedor, :nombre, :telefono, :email, :direccion, :comuna, :rubro, :vigencia)");
+                da.AgregarParametro(":id_proveedor", proveedor.IdProveedor, DbType.Int32);
+                da.AgregarParametro(":nombre", proveedor.NombreProveedor, DbType.String);
                 da.AgregarParametro(":telefono", proveedor.Telefono, DbType.String);
                 da.AgregarParametro(":email", proveedor.Email, DbType.String);
                 da.AgregarParametro(":direccion", proveedor.Direccion, DbType.String);
@@ -34,6 +34,7 @@ namespace SistemaLosYuyitos.Controlador
             }
             return res;
         }
+
         public Proveedor Read(string id_proveedor)
         {
             Proveedor proveedor = new Proveedor();
@@ -44,16 +45,15 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    /*
-                    proveedor.IdProveedor = reader["id_proveedor"].ToString();
+                    proveedor.IdProveedor = Convert.ToInt32(reader["id_proveedor"].ToString());
                     proveedor.NombreProveedor = reader["nombre_proveedor"].ToString();
                     proveedor.Telefono = reader["telefono"].ToString();
                     proveedor.Email = reader["email"].ToString();
                     proveedor.Direccion = reader["direccion"].ToString();
-                    proveedor.Comuna = reader["COMUNA_id_comuna"];
-                    proveedor.Rubro = reader["RUBRO_id_rubro"];
+                    proveedor.Comuna = Convert.ToInt32(reader["COMUNA_id_comuna"].ToString());
+                    proveedor.Rubro = Convert.ToInt32(reader["RUBRO_id_rubro"].ToString());
                     proveedor.Vigencia = reader["vigencia"].ToString();
-                    */
+               
                 }
             }
             return proveedor;
