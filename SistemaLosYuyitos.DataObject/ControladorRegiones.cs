@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 public SistemaLosYuyitos.Controlador
 {
-	public class region
+	public class ControladorRegiones
 	{
         DataAccess.DataAccess da;
 
