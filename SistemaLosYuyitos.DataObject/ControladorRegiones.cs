@@ -8,13 +8,13 @@ using SistemaLosYuyitos.DataAccess;
 using System.Data;
 using System.Data.SqlClient;
 
-public SistemaLosYuyitos.Controlador
+namespace SistemaLosYuyitos.Controlador
 {
 	public class ControladorRegiones
 	{
         DataAccess.DataAccess da;
 
-        public List<Region> llenarRegion()
+        public List<Region> ObtenerRegiones()
         {
             List<Region> list = new List<Region>();
             //Region region = new Region();
@@ -24,25 +24,34 @@ public SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    list.Add(reader["id_region"].ToString(), reader["nombre_region"].ToString());
-                    
+                    Region reg = new Region
+                    {
+                        IdRegion = Convert.ToInt32(reader["id_region"].ToString()),
+                        NombreRegion = reader["nombre_region"].ToString()
+                    };
+                    list.Add(reg);
                 }
             }
             return list;
 
         }
 
-        public List<Provincia> llenarProvincia(string id_region)
+        public List<Provincia> ObtenerProvinciasDeRegion(string id_region)
         {
             List<Provincia> list = new List<Provincia>();
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select id_provincia, nombre_provincia, REGION_id_region from provincia where REGION_id_region = :id_region ");
+                da.GenerarComando("select id_provincia, nombre_provincia from provincia where id_region = :id_region ");
                 da.AgregarParametro(":id_region", id_region);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    list.Add(reader["id_provincia"].ToString(), reader["nombre_provincia"].ToString(), reader["REGION_id_region"].ToString());
+                    Provincia prov = new Provincia
+                    {
+                        IdProvincia = Convert.ToInt32(reader["id_provincia"].ToString()),
+                        NombreProvincia = reader["nombre_provincia"].ToString()
+                    };
+                    list.Add(prov);
 
                 }
             }
@@ -50,18 +59,22 @@ public SistemaLosYuyitos.Controlador
 
         }
 
-        public List<Comuna> llenarComuna(string id_provincia)
+        public List<Comuna> ObtenerComunasDeProvincia(string id_provincia)
         {
             List<Comuna> list = new List<Comuna>();
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select id_comuna, nombre_comuna, PROVINCIA_id_provincia from comuna where PROVINCIA_id_provincia = :id_provincia");
+                da.GenerarComando("select id_comuna, nombre_comuna from comuna where id_provincia = :id_provincia");
                 da.AgregarParametro(":id_provincia", id_provincia);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    list.Add(reader["id_comuna"].ToString(), reader["nombre_comuna"].ToString(), reader["PROVINCIA_id_provincia"].ToString());
-
+                    Comuna com = new Comuna
+                    {
+                        IdComuna = Convert.ToInt32(reader["id_comuna"].ToString()),
+                        NombreComuna = reader["nombre_comuna"].ToString()
+                    };
+                    list.Add(com);
                 }
             }
             return list;

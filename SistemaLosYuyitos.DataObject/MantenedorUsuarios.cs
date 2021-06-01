@@ -84,7 +84,31 @@ namespace SistemaLosYuyitos.Controlador
             }
             return res;
         }
-
+        public List<Usuario> List()
+        {
+            List<Usuario> lista = new List<Usuario>();
+            using (da = new DataAccess.DataAccess())
+            {
+                da.GenerarComando("select id_usuario, nombre_usuario, administrador, vigencia, ultimo_cambio_contraseña, fecha_creacion from usuario");
+                var reader = da.ExecuteReader();
+                while (reader.Read())
+                {
+                    string ultimo_cambio_contraseña = reader["ultimo_cambio_contraseña"].ToString();
+                    string fecha_creacion = reader["fecha_creacion"].ToString();
+                    Usuario usuario = new Usuario
+                    {
+                        IdUsuario = reader["id_usuario"].ToString(),
+                        NombreUsuario = reader["nombre_usuario"].ToString(),
+                        Administrador = reader["administrador"].ToString() == "y",
+                        Vigente = reader["vigencia"].ToString() == "y",
+                        UltimoCambioContraseña = Convert.ToDateTime(ultimo_cambio_contraseña),
+                        FechaCreacion = Convert.ToDateTime(fecha_creacion)
+                    };
+                    lista.Add(usuario);
+                }
+            }
+            return lista;
+        }
         public bool Login(string id_usuario, string hash)
         {
             bool logueado = false;

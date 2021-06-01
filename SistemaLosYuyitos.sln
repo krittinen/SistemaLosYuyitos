@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.DataAcces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.Controlador", "SistemaLosYuyitos.DataObject\SistemaLosYuyitos.Controlador.csproj", "{E445F58D-EF9C-42E2-8420-6DE4275053E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaLosYuyitos.WebServices", "SistemaLosYuyitos.WebServices\SistemaLosYuyitos.WebServices.csproj", "{4D160BC6-0A70-499F-8D89-5ED10BF347F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E445F58D-EF9C-42E2-8420-6DE4275053E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D160BC6-0A70-499F-8D89-5ED10BF347F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D160BC6-0A70-499F-8D89-5ED10BF347F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D160BC6-0A70-499F-8D89-5ED10BF347F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D160BC6-0A70-499F-8D89-5ED10BF347F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
