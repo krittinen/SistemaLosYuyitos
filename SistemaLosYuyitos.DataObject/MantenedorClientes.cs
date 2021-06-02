@@ -12,7 +12,6 @@ namespace SistemaLosYuyitos.Controlador
     public class MantenedorClientes
     {
         DataAccess.DataAccess da;
-        MantenedorUsuarios mantenedorUsuarios = new MantenedorUsuarios();
         public bool Create(Cliente cliente)
         {
             bool res = false;
@@ -32,7 +31,6 @@ namespace SistemaLosYuyitos.Controlador
             }
             return res;
         }
-
         public Cliente Read(string rut)
         {
             Cliente cliente = null;
@@ -64,7 +62,6 @@ namespace SistemaLosYuyitos.Controlador
             }
             return cliente;
         }
-
         public bool Update(Cliente cliente)
         {
             bool res = false;

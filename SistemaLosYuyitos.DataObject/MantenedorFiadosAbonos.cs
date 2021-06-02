@@ -13,7 +13,7 @@ namespace SistemaLosYuyitos.Controlador
         DataAccess.DataAccess da;
         MantenedorUsuarios mantenedorUsuarios = new MantenedorUsuarios();
         MantenedorClientes mantenedorClientes = new MantenedorClientes();
-        //MantenedorBoletas mantenedorBoletas = new MantenedorBoletas();
+        MantenedorVentas mantenedorBoletas = new MantenedorVentas();
         public bool Create(Fiado fiado)
         {
             bool resFiado = false;
@@ -43,7 +43,6 @@ namespace SistemaLosYuyitos.Controlador
             }
             return resFiado;
         }
-
         public Fiado Read(decimal id_fiado)
         {
             Fiado fiado = null;
@@ -61,7 +60,7 @@ namespace SistemaLosYuyitos.Controlador
                         IdFiado = Convert.ToDecimal(reader["id_fiado"].ToString()),
                         FechaFiado = Convert.ToDateTime(reader["fecha_fiado"].ToString()),
                         FechaVencimiento = Convert.ToDateTime(reader["fecha_vencimiento"].ToString()),
-                        //Boleta = mantenedorBoletas.Read(nro_boleta),
+                        Boleta = mantenedorBoletas.Read(nro_boleta.ToString()),
                         TotalAbonos = Convert.ToDecimal(reader["total_abonos"].ToString()),
                         TotalPago = Convert.ToDecimal(reader["total_pago"].ToString()),
                         Vencido = reader["esta_vencido"].ToString() == "y",
@@ -103,7 +102,7 @@ namespace SistemaLosYuyitos.Controlador
                         IdFiado = id_fiado,
                         FechaFiado = Convert.ToDateTime(reader["fecha_fiado"].ToString()),
                         FechaVencimiento = Convert.ToDateTime(reader["fecha_vencimiento"].ToString()),
-                        //Boleta = mantenedorBoletas.Read(nro_boleta),
+                        Boleta = mantenedorBoletas.Read(nro_boleta.ToString()),
                         TotalAbonos = Convert.ToDecimal(reader["total_abonos"].ToString()),
                         TotalPago = Convert.ToDecimal(reader["total_pago"].ToString()),
                         Vencido = reader["esta_vencido"].ToString() == "y",
@@ -132,7 +131,7 @@ namespace SistemaLosYuyitos.Controlador
                         IdFiado = id_fiado,
                         FechaFiado = Convert.ToDateTime(reader["fecha_fiado"].ToString()),
                         FechaVencimiento = Convert.ToDateTime(reader["fecha_vencimiento"].ToString()),
-                        //Boleta = mantenedorBoletas.Read(nro_boleta),
+                        Boleta = mantenedorBoletas.Read(nro_boleta.ToString()),
                         TotalAbonos = Convert.ToDecimal(reader["total_abonos"].ToString()),
                         TotalPago = Convert.ToDecimal(reader["total_pago"].ToString()),
                         Vencido = reader["esta_vencido"].ToString() == "y",

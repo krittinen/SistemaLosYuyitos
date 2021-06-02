@@ -24,7 +24,7 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    list.Add(reader["codigo_barra"].ToString(), reader["descripcion"].ToString(), reader["precio_compra"].ToString());
+                    /*list.Add(reader["codigo_barra"].ToString(), reader["descripcion"].ToString(), reader["precio_compra"].ToString());*/
 
                 }
             }
@@ -64,13 +64,13 @@ namespace SistemaLosYuyitos.Controlador
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 {
-                    
+                    /*
                     orden.IdOrden = reader["id_orden"].ToString();
                     orden.FechaOrden = reader["fecha_orden"].ToString();
                     orden.TotalOrden = reader["total_orden"].ToInt;
                     orden.Recibida = reader["USUARIO_id_usuario"].ToString();
                     orden.FechaRecepcion
-                   
+                   */
                 }
             }
             return orden;

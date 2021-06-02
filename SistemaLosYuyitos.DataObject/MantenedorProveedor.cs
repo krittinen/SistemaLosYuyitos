@@ -52,7 +52,7 @@ namespace SistemaLosYuyitos.Controlador
                     proveedor.Direccion = reader["direccion"].ToString();
                     proveedor.Comuna = Convert.ToInt32(reader["COMUNA_id_comuna"].ToString());
                     proveedor.Rubro = Convert.ToInt32(reader["RUBRO_id_rubro"].ToString());
-                    proveedor.Vigencia = reader["vigencia"].ToString();
+                    proveedor.Vigencia = reader["vigencia"].ToString() == "y";
                
                 }
             }
