@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="WSControladorRegiones.asmx.cs" Class="SistemaLosYuyitos.WebServices.WSControladorRegiones" %>
