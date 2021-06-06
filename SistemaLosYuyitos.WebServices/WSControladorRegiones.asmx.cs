@@ -46,6 +46,7 @@ namespace SistemaLosYuyitos.WebServices
             return mantenedor.obtenerProvincia(id_comuna);
         }
 
+        [WebMethod]
         public Region obtenerRegion(int id_provincia)
         {
             return mantenedor.obtenerRegion(id_provincia);
