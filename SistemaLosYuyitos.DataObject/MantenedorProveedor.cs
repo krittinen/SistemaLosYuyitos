@@ -19,7 +19,7 @@ namespace SistemaLosYuyitos.Controlador
             bool res = false;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando(@"insert into proveedor(id_proveedor, nombre_proveedor, telefono, email, direccion, COMUNA_id_comuna, RUBRO_id_rubro, vigencia)
+                da.GenerarComando(@"insert into proveedor(id_proveedor, nombre_proveedor, telefono, email, direccion, id_comuna, id_rubro, vigencia)
                                     values (:id_proveedor, :nombre, :telefono, :email, :direccion, :comuna, :rubro, :vigencia)");
                 da.AgregarParametro(":id_proveedor", proveedor.IdProveedor, DbType.Int32);
                 da.AgregarParametro(":nombre", proveedor.NombreProveedor, DbType.String);
@@ -35,12 +35,12 @@ namespace SistemaLosYuyitos.Controlador
             return res;
         }
 
-        public Proveedor Read(string id_proveedor)
+        public Proveedor Read(int id_proveedor)
         {
             Proveedor proveedor = new Proveedor();
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("select id_proveedor, nombre_proveedor, telefono, email, direccion, COMUNA_id_comuna, RUBRO_id_rubro, vigencia from proveedor where id_proveedor = :proveedor");
+                da.GenerarComando("select id_proveedor, nombre_proveedor, telefono, email, direccion, id_comuna, id_rubro, vigencia from proveedor where id_proveedor = :proveedor");
                 da.AgregarParametro(":proveedor", id_proveedor);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
@@ -64,7 +64,7 @@ namespace SistemaLosYuyitos.Controlador
             bool res = false;
             using (da = new DataAccess.DataAccess())
             {
-                da.GenerarComando("update proveedor set nombre_proveedor = :nombre_proveedor, telefono = :telefono, email = :email, COMUNA_id_comuna = :comuna, RUBRO_id_rubro = :rubro, vigencia = :vigencia where id_proveedor = :id_proveedor");
+                da.GenerarComando("update proveedor set nombre_proveedor = :nombre_proveedor, telefono = :telefono, email = :email, id_comuna = :comuna, id_rubro = :rubro, vigencia = :vigencia where id_proveedor = :id_proveedor");
                 da.AgregarParametro(":nombre_proveedor", proveedor.NombreProveedor, DbType.String);
                 da.AgregarParametro(":telefono", proveedor.Telefono, DbType.String);
                 da.AgregarParametro(":email", proveedor.Email, DbType.String);
@@ -78,7 +78,7 @@ namespace SistemaLosYuyitos.Controlador
             return res;
         }
 
-        public bool Delete(string id_proveedor)
+        public bool Delete(int id_proveedor)
         {
             bool res = false;
             using (da = new DataAccess.DataAccess())
