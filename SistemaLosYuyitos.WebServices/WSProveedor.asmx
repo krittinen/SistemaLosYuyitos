@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="WSProveedor.asmx.cs" Class="SistemaLosYuyitos.WebServices.WSProveedor" %>
