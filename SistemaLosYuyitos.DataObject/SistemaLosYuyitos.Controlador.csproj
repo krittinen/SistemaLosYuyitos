@@ -41,14 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControladorRegiones.cs" />
+    <Compile Include="MantenedorRegiones.cs" />
     <Compile Include="MantenedorClientes.cs" />
     <Compile Include="MantenedorFiadosAbonos.cs" />
-    <Compile Include="MantenedorOrdenPedido.cs" />
+    <Compile Include="MantenedorOrdenes.cs" />
     <Compile Include="MantenedorProducto.cs" />
     <Compile Include="MantenedorProveedor.cs" />
     <Compile Include="MantenedorUsuarios.cs" />
-    <Compile Include="MantenedorVentas.cs" />
+    <Compile Include="MantenedorBoletas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

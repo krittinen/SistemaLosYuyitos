@@ -349,7 +349,6 @@ namespace SistemaLosYuyitos.ConsoleApp
             Console.WriteLine("\nPruebas correctas: {0}\nPruebas erroneas: {1}\n", correctos, errores);
             Console.WriteLine("Presione cualquier tecla para continuar...");
         }
-
         static void MenuMantenedorFiados()
         {
             Console.Clear();

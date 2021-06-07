@@ -13,7 +13,8 @@ namespace SistemaLosYuyitos.Entidad
         public decimal TotalOrden { get { return TotalOrden; } set { if (value >= 0) TotalOrden = value; } }
         public bool Recibida { get; set; }
         public bool Anulada { get; set; }
-        public DateTime FechaRecepcion { get; set; }
+        public DateTime? FechaRecepcion { get; set; }
         public string IdUsuario { get; set; }
+        public List<Pedido> ProductosEnOrden { get; set; }
     }
 }

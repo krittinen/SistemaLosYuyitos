@@ -13,7 +13,7 @@ namespace SistemaLosYuyitos.Controlador
         DataAccess.DataAccess da;
         MantenedorUsuarios mantenedorUsuarios = new MantenedorUsuarios();
         MantenedorClientes mantenedorClientes = new MantenedorClientes();
-        MantenedorVentas mantenedorBoletas = new MantenedorVentas();
+        MantenedorBoletas mantenedorBoletas = new MantenedorBoletas();
         public bool Create(Fiado fiado)
         {
             bool resFiado = false;
