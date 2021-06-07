@@ -47,7 +47,7 @@ namespace SistemaLosYuyitos.Controlador
             }
             return res;
         }
-        public Boleta Read(string nro_boleta)
+        public Boleta Read(decimal nro_boleta)
         {
             Boleta boleta = null;
             using (da = new DataAccess.DataAccess())
@@ -87,7 +87,7 @@ namespace SistemaLosYuyitos.Controlador
             }
             return lista;
         }
-        public bool Anular(string nro_boleta)
+        public bool Anular(decimal nro_boleta)
 {
             bool res = false;
             using (da = new DataAccess.DataAccess())

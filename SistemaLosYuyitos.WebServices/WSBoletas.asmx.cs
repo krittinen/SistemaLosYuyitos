@@ -26,12 +26,12 @@ namespace SistemaLosYuyitos.WebServices
             return mantenedor.Create(boleta);
         }
         [WebMethod]
-        public Boleta ObtenerBoleta(string nro_boleta)
+        public Boleta ObtenerBoleta(decimal nro_boleta)
         {
             return mantenedor.Read(nro_boleta);
         }
         [WebMethod]
-        public bool AnularBoleta(string nro_boleta)
+        public bool AnularBoleta(decimal nro_boleta)
         {
             return mantenedor.Anular(nro_boleta);
         }
