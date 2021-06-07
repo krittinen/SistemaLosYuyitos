@@ -75,6 +75,7 @@
     <Content Include="WSFiadosAbonos.asmx" />
     <Content Include="WSOrdenes.asmx" />
     <Content Include="WSProductos.asmx" />
+    <Content Include="WSProveedores.asmx" />
     <Content Include="WSPruebaConexion.asmx" />
     <Content Include="WSRegiones.asmx" />
     <Content Include="WSUsuarios.asmx" />
@@ -113,6 +114,10 @@
     </Compile>
     <Compile Include="WSProductos.asmx.cs">
       <DependentUpon>WSProductos.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WSProveedores.asmx.cs">
+      <DependentUpon>WSProveedores.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WSPruebaConexion.asmx.cs">

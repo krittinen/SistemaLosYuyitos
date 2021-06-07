@@ -72,7 +72,7 @@ namespace SistemaLosYuyitos.Controlador
             }
             return boleta;
         }
-        private List<string> ObtenerProductosDeBoleta(string nro_boleta)
+        private List<string> ObtenerProductosDeBoleta(decimal nro_boleta)
         {
             List<string> lista = new List<string>();
             using (da = new DataAccess.DataAccess())

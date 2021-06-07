@@ -17,6 +17,7 @@
             <a href="WSBoletas.asmx?wsdl">WSBoletas</a>
             <a href="WSProductos.asmx?wsdl">WSProductos</a>
             <a href="WSOrdenes.asmx?wsdl">WSOrdenes</a>
+            <a href="WSProveedores.asmx?wsdl">WSProveedores</a>
             <a href="WSRegiones.asmx?wsdl">WSRegiones</a>
         </div>
     </form>
