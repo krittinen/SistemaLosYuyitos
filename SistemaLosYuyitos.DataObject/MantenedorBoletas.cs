@@ -72,7 +72,6 @@ namespace SistemaLosYuyitos.Controlador
             }
             return boleta;
         }
-
         private List<string> ObtenerProductosDeBoleta(string nro_boleta)
         {
             List<string> lista = new List<string>();
@@ -88,7 +87,6 @@ namespace SistemaLosYuyitos.Controlador
             }
             return lista;
         }
-
         public bool Anular(string nro_boleta)
 {
             bool res = false;

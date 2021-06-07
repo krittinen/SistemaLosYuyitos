@@ -39,7 +39,7 @@ namespace SistemaLosYuyitos.Controlador
         }
 
         //crear listado productos de la orden 
-        public bool AsociarProductoOrden(Pedido pedido, decimal id_orden)
+        private bool AsociarProductoOrden(Pedido pedido, decimal id_orden)
         {
             bool res = false;
             using (da = new DataAccess.DataAccess())
@@ -47,7 +47,7 @@ namespace SistemaLosYuyitos.Controlador
                 da.GenerarComando(@"insert into pedido_producto(codigo_barra, num_orden, cant_producto, subtotal)
                                     values (:cod_barra, :num_orden, :cant_producto, :subtotal");
                 da.AgregarParametro(":cod_barra", pedido.CodigoBarra);
-                da.AgregarParametro(":num_orden", pedido.IdOrden);
+                da.AgregarParametro(":num_orden", id_orden);
                 da.AgregarParametro(":cant_producto", pedido.Cantidad, DbType.Int32);
                 da.AgregarParametro(":subtotal", pedido.SubTotal, DbType.Int64);
                 res = da.ExecuteNonQuery() > 0;
@@ -82,7 +82,7 @@ namespace SistemaLosYuyitos.Controlador
             return orden;
         }
         //Buscar lista de productos de la orden a buscar
-        public List<Pedido> ObtenerProductosEnOrden(decimal num_orden)
+        private List<Pedido> ObtenerProductosEnOrden(decimal num_orden)
         {
             List<Pedido> lista = new List<Pedido>();
             using (da = new DataAccess.DataAccess())

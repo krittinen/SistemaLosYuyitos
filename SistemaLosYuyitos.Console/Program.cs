@@ -351,12 +351,108 @@ namespace SistemaLosYuyitos.ConsoleApp
         }
         static void MenuMantenedorFiados()
         {
+            errores = 0;
+            correctos = 0;
             Console.Clear();
             Console.WriteLine("------ Admin Consola para Sistema Los Yuyitos -----\n\n");
-            Console.WriteLine("Mantenedor de Fiados y Abonos\n");
-            Console.WriteLine("Opciones:\n");
-            Console.WriteLine("1. Generar Fiado");
-            Console.WriteLine("2. Abono Fiado");
+            Console.WriteLine("Pruebas Mantenedor de Deudas y Abonos\n\n");
+
+            Console.WriteLine("\nEjecutando prueba de insercion");
+            try
+            {
+                if (mantenedorClientes.Create(DatosPruebas.clientePrueba))
+                {
+                    Console.WriteLine("Prueba satisfactoria.");
+                    correctos++;
+                }
+                else
+                {
+                    Console.WriteLine("Prueba no satisfactoria.");
+                    errores++;
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+
+            Console.WriteLine("\nEjecutando prueba de lectura");
+            cliente = mantenedorClientes.Read(DatosPruebas.clientePrueba.RutCliente);
+            if (cliente.RutCliente != null && cliente.RutCliente == DatosPruebas.clientePrueba.RutCliente)
+            {
+                Console.WriteLine("\nRUT Cliente: {0}", cliente.RutCliente);
+                Console.WriteLine("Nombre Cliente: {0}", cliente.NombreCliente);
+                Console.WriteLine("Telefono Cliente: {0}", cliente.Telefono);
+                Console.WriteLine("Correo Cliente: {0}", cliente.Correo);
+                Console.WriteLine("Direccion Cliente: {0}", cliente.Direccion);
+                Console.WriteLine("Autorizado para fiar: {0}", cliente.AutorizadoParaFiar);
+                Console.WriteLine("ID Comuna: {0}", cliente.IdComuna);
+                Console.WriteLine("ID Provincia: {0}", cliente.IdProvincia);
+                Console.WriteLine("ID Region: {0}", cliente.IdRegion);
+                Console.WriteLine("\nPrueba satisfactoria");
+                correctos++;
+            }
+            else
+            {
+                Console.WriteLine("Prueba no satisfactoria");
+                errores++;
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+
+            Console.WriteLine("\nEjecutando prueba de modificacion.");
+            if (mantenedorClientes.Update(DatosPruebas.clientePruebaModificado))
+            {
+                cliente = mantenedorClientes.Read(DatosPruebas.clientePrueba.RutCliente);
+                if (cliente != null && cliente.NombreCliente == DatosPruebas.clientePruebaModificado.NombreCliente)
+                {
+                    Console.WriteLine("\nRUT Cliente: {0}", cliente.RutCliente);
+                    Console.WriteLine("Nombre Cliente: {0}", cliente.NombreCliente);
+                    Console.WriteLine("Telefono Cliente: {0}", cliente.Telefono);
+                    Console.WriteLine("Correo Cliente: {0}", cliente.Correo);
+                    Console.WriteLine("Direccion Cliente: {0}", cliente.Direccion);
+                    Console.WriteLine("Autorizado para fiar: {0}", cliente.AutorizadoParaFiar);
+                    Console.WriteLine("ID Comuna: {0}", cliente.IdComuna);
+                    Console.WriteLine("ID Provincia: {0}", cliente.IdProvincia);
+                    Console.WriteLine("ID Region: {0}", cliente.IdRegion);
+                    Console.WriteLine("\nPrueba satisfactoria");
+                    correctos++;
+                }
+                else
+                {
+                    Console.WriteLine("Prueba no satisfactoria");
+                    errores++;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Prueba no satisfactoria");
+                errores++;
+            }
+            Console.WriteLine("Presione cualquier tecla para continuar...");
+            Console.ReadKey();
+
+            Console.WriteLine("\nEjecutando prueba de lista");
+            List<Cliente> lista = mantenedorClientes.List();
+            if (lista.Count > 0)
+            {
+                Console.WriteLine("Prueba satisfactoria\n");
+                correctos++;
+                foreach (var item in lista)
+                {
+                    Console.WriteLine(item.RutCliente);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Prueba no satisfactoria");
+                errores++;
+            }
+
+            Console.WriteLine("\nPruebas correctas: {0}\nPruebas erroneas: {1}\n", correctos, errores);
+            Console.WriteLine("Presione cualquier tecla para continuar...");
         }
     }
 }
