@@ -57,13 +57,13 @@ namespace SistemaLosYuyitos.Controlador
         
 
         //Buscar una orden
-        public Orden Read(int id_orden)
+        public Orden Read(int num_orden)
         {
             Orden orden = new Orden();
             using (da = new DataAccess.DataAccess())
             {
                 da.GenerarComando(@"select num_orden, fecha_orden, total_orden, fecha_recepcion, recibida, anulada, id_usuario from orden where num_orden = :orden");
-                da.AgregarParametro(":orden", id_orden);
+                da.AgregarParametro(":orden", num_orden);
                 IDataReader reader = da.ExecuteReader();
                 while (reader.Read())
                 { 

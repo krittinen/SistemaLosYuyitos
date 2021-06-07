@@ -10,7 +10,7 @@ using SistemaLosYuyitos.Controlador;
 namespace SistemaLosYuyitos.WebServices
 {
     /// <summary>
-    /// Summary description for WSProveedor
+    /// Summary description for WSOrdenPedido
     /// </summary>
 
     [WebService(Namespace = "http://tempuri.org/")]
@@ -18,39 +18,36 @@ namespace SistemaLosYuyitos.WebServices
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class WSProveedor : System.Web.Services.WebService
+    public class WSOrdenPedido : System.Web.Services.WebService
     {
 
-        static MantenedorProveedor mantenedor = new MantenedorProveedor();
+        static MantenedorOrdenPedido mantenedor = new MantenedorOrdenPedido();
         [WebMethod]
-        public bool  create(Proveedor proveedor)
+        public bool CreateOrden(Orden orden)
         {
-            return mantenedor.Create(Proveedor proveedor);
+            return mantenedor.Create(orden);
         }
 
         [WebMethod]
-        public Proveedor read(int id_proveedor)
+        public bool CreatePedido(List<Pedido> pedido)
         {
-            return mantenedor.Read(id_proveedor);
+            return mantenedor.CreatePedido(pedido);
         }
 
         [WebMethod]
-        public bool  update(Proveedor proveedor) 
+        public Orden ReadOrden(int num_orden)
         {
-            return mantenedor.Update(proveedor);
+            return mantenedor.Read(num_orden);
         }
 
         [WebMethod]
-        public bool delete(int id_proveedor)
+        public List<Pedido> ReadPedido(int num_orden)
         {
-            return mantenedor.Delete(id_proveedor);
+            return mantenedor.ListarPedido(num_orden);
         }
 
-      
+
     }
 
 
 }
-
-
-
