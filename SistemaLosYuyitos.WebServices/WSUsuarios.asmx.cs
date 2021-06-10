@@ -44,6 +44,7 @@ namespace SistemaLosYuyitos.WebServices
         {
             return mantenedor.List();
         }
+        [WebMethod]
         public bool Login(string id_usuario, string hash)
         {
             return mantenedor.Login(id_usuario, hash);

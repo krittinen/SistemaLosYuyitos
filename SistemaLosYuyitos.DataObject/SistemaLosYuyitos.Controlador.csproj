@@ -50,6 +50,7 @@
     <Compile Include="MantenedorUsuarios.cs" />
     <Compile Include="MantenedorBoletas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PruebaConexion.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

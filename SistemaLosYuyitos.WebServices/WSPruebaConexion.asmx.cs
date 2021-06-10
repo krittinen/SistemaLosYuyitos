@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using SistemaLosYuyitos.Controlador;
 
 namespace SistemaLosYuyitos.WebServices
 {
@@ -16,11 +17,13 @@ namespace SistemaLosYuyitos.WebServices
     // [System.Web.Script.Services.ScriptService]
     public class WSPruebaConexion : System.Web.Services.WebService
     {
+        PruebaConexion ps = new PruebaConexion();
 
         [WebMethod]
         public bool ProbarConexion()
         {
-            return true;
+            
+            return ps.Prueba();
         }
     }
 }

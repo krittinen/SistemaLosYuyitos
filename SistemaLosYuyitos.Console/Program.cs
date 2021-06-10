@@ -28,7 +28,9 @@ namespace SistemaLosYuyitos.ConsoleApp
         {
             MantenedorClientes.BorrarClientePrueba(DatosPruebas.clientePrueba.RutCliente);
             MantenedorUsuarios.BorrarUsuariosPrueba(new List<string>() { DatosPruebas.usuarioPrueba.IdUsuario, DatosPruebas.usuarioNoVigente.IdUsuario});
-            MenuPrincipal();
+            //MenuPrincipal();
+            Console.WriteLine(mantenedorUsuarios.Login("usuario_prueba", "ABCDEF1"));
+            Console.ReadLine();
         }
 
         static void MenuPrincipal()
