@@ -8,13 +8,13 @@ namespace SistemaLosYuyitos.Controlador
 {
     public class PruebaConexion
     {
-        public PruebaConexion()
-        {
-            DataAccess.DataAccess da = new DataAccess.DataAccess();
-        }
+        DataAccess.DataAccess da;
 
         public bool Prueba()
         {
+            using (da = new DataAccess.DataAccess())
+            {
+            }
             return true;
         }
     }
